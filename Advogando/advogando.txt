@@ -1,0 +1,92 @@
+
+DROP TABLE IF EXISTS usuarios;
+DROP TABLE IF EXISTS agenda;
+DROP TABLE IF EXISTS cliente_processo;
+DROP TABLE IF EXISTS documentos;
+DROP TABLE IF EXISTS processos;
+DROP TABLE IF EXISTS clientes;
+DROP TABLE IF EXISTS representantes;
+
+CREATE TABLE representantes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    documento VARCHAR(14) NOT NULL,
+    telefone VARCHAR(20),
+    celular VARCHAR(20),
+    email VARCHAR(30),
+    observacao VARCHAR(255),
+    status BOOLEAN
+);
+
+CREATE TABLE clientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    repres_id INT,
+    tipo CHAR(1),
+    nome VARCHAR(100) NOT NULL,
+    documento1 VARCHAR(20) NOT NULL,
+    documento2 VARCHAR(20),
+    data_nasc DATE,
+    sexo CHAR(1),
+    telefone VARCHAR(20),
+    celular VARCHAR(20),
+    email VARCHAR(30),
+    endereco VARCHAR(30),
+    numero VARCHAR(10),
+    complemento VARCHAR(10),
+    cidade VARCHAR(30),
+    estado CHAR(2),
+    cep VARCHAR(20),
+    observacao VARCHAR(255),
+    status BOOLEAN,
+    FOREIGN KEY cl_representante_key (repres_id) REFERENCES representantes(id)
+);
+
+CREATE TABLE processos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    numero VARCHAR(30) NOT NULL,
+    nome VARCHAR(30) NOT NULL,
+    natureza VARCHAR(30) NOT NULL,
+    data_inicio DATE NOT NULL,
+    situacao VARCHAR(30) NOT NULL,
+    observacao VARCHAR(255),
+    status BOOLEAN
+);
+
+CREATE TABLE documentos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    processo_id INT NOT NULL,
+    local VARCHAR(255) NOT NULL,
+    tipo VARCHAR(20) NOT NULL,
+    observacao VARCHAR(255),
+    status BOOLEAN,
+    FOREIGN KEY doc_processo_key (processo_id) REFERENCES processos(id)
+);
+
+CREATE TABLE cliente_processo (
+    cliente_id INT NOT NULL,
+    processo_id INT NOT NULL,
+    PRIMARY KEY (cliente_id, processo_id),
+    FOREIGN KEY cp_cliente_key (cliente_id) REFERENCES clientes(id),
+    FOREIGN KEY cp_processo_key (processo_id) REFERENCES processos(id)
+);
+
+CREATE TABLE agenda (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT,
+    processo_id INT,
+    evento VARCHAR(30) NOT NULL,
+    data DATE NOT NULL,
+    hora time NOT NULL,
+    observacao VARCHAR(255),
+    status BOOLEAN,
+    FOREIGN KEY ag_cliente_key (cliente_id) REFERENCES clientes(id),
+    FOREIGN KEY ag_processo_key (processo_id) REFERENCES processos(id)
+);
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(30) NOT NULL,
+    email VARCHAR(30) NOT NULL,
+    senha VARCHAR(32) NOT NULL
+);
+INSERT INTO usuarios (id, nome, email, senha) VALUES (1, 'Administrador', 'admin', '21232f297a57a5a743894a0e4a801fc3');

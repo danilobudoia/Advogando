@@ -1,0 +1,20 @@
+
+
+Processo: p_nome, Nº p_numero, de natureza p_natureza, que se iniciou em p_data_inicio
+
+$c_nome, portador da Carteira de Identidade Nº c_documento2, inscrito no CPF sob o Nº c_documento1, nascido em c_data_nasc, residente e domiciliada à c_endereco, Nº c_numero, c_cidade/c_estado, no CEP Nº c_cep
+
+Representado por r_nome, documento Nº r_documento, por motivos de ________
+
+
+conteudo_pt1
+
+conteudo_pt2
+
+CONTEÚDO (Leis, causas e/ou pedidos)
+
+
+LOCAL, DATA
+
+NOME DO ADVOGADO
+Nº OAB E SEÇÃO
